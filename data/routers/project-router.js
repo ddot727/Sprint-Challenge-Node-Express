@@ -14,4 +14,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const project = await projectDb.get(id);
+    res.status(200).json(project);
+  } catch (error) {
+    res.status(500).json({ message: "error retrieving project" });
+  }
+});
+
+router.get("/:id/actions", (req,res) => {
+  projectDb.getProjectActions(req.params.id)
+    .then(project => res.status(200).json(project))
+    .catch(error =>
+      res.status(500).json({
+        message: "error getting project actions"
+      }))
+})
+
 module.exports = router;
