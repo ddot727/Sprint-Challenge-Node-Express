@@ -61,11 +61,11 @@ router.post("/", (req, res) => {
     const { id } = req.params;
     await projectDb.remove(id);
     res.status(200).json({ 
-      message: "successfully deleted"
+      message: "Delete Successful"
     });
   } catch (error) {
     res.status(500).json({ 
-      message: "error deleting"
+      message: "error deleting project"
     });
   }
 });
